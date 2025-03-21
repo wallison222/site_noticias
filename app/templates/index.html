@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notícias Personalizadas</title>
+
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .noticia {
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+        }
+
+        .noticia h2 {
+            font-size: 1.5rem;
+        }
+
+        .noticia a {
+            text-decoration: none;
+            color: #1976D2;
+            font-weight: bold;
+        }
+
+        .noticia a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="blue darken-3">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo">Notícias</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <div class="container">
+        <h4 class="center-align">Últimas Notícias</h4>
+
+        <!-- Formulário de seleção de categoria -->
+        <form method="POST" class="row">
+            <div class="input-field col s8">
+                <select name="categoria" id="categoria" class="browser-default">
+                    {% for cat in categorias %}
+                        <option value="{{ cat }}" {% if cat == categoria_atual %}selected{% endif %}>
+                            {{ cat.capitalize() }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col s4">
+                <button type="submit" class="btn waves-effect waves-light blue">Filtrar</button>
+            </div>
+        </form>
+
+        <!-- Exibição das notícias -->
+        {% for noticia in noticias %}
+            <div class="noticia">
+                <h2>{{ noticia.title }}</h2>
+                <p>{{ noticia.description or "Descrição não disponível." }}</p>
+                <a href="{{ noticia.url }}" target="_blank">Leia mais</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+</body>
+</html>
