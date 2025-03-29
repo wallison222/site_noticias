@@ -10,3 +10,4 @@ class Usuario(db.Model, UserMixin):
 
     def __repr__(self):
         return f'<Usuario {self.nome}>'
+# Compare this snippet from app/auth.py:
